@@ -4,8 +4,9 @@ const path = require('path');
 
 const storage = multer.diskStorage({
   destination({ params } = request, _, cb) {
-    cb(null, path.join(__dirname, `../database/${params.project}`));
+    cb(null, path.resolve(__dirname, `../database/${params.project}`));
   },
+
   filename(_, file, cb) {
     cb(null, `${file.fieldname}-${Date.now()}.png`);
   },
@@ -14,6 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   limits: {
+    files: 20,
     fileSize: 2 * 1024 * 1024,
   },
 });

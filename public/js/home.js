@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   function createFolder(params) {
-    console.log(params);
     const folder = document.createElement('li');
     folder.setAttribute('class', 'folder');
 

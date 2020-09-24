@@ -1,6 +1,5 @@
 require('module-alias/register');
 
-const R = require('ramda');
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');

@@ -13,12 +13,18 @@
   </head>
   <body>
     <div id="header">
-      <h2 id="title">Projetos</h2>
-
-      <label for="files" id="upload">Fazer upload</label>
-      <button name="file" id="confirm">Confirmar</button>
-
-      <input type="file" id="files" multiple draggable="true" />
+      <form
+        action="/api/uploads/i2ai"
+        enctype="multipart/form-data"
+        method="post"
+        id="form"
+      >
+        <h2 id="title">Projetos</h2>
+        <h5 id="current"></h5>
+        <label for="files" id="upload">Fazer upload</label>
+        <input type="file" id="files" name="file" multiple draggable="true" />
+        <button type="submit" name="file" id="confirm">Confirmar</button>
+      </form>
     </div>
 
     <div id="container">

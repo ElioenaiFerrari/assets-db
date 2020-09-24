@@ -3,37 +3,33 @@ document.addEventListener('DOMContentLoaded', async function () {
     'https://icons.iconarchive.com/icons/cornmanthe3rd/metronome/512/System-folder-icon.png';
   const API_URL = 'http://localhost:3333/api';
   const content = document.querySelector('#content');
+  const currentProject = document.querySelector('#current');
 
-  function expandFolder(folder) {}
+  function selectProject(params, folder) {
+    currentProject.innerText = `${params.folderName}`;
+  }
+
   function excludeFile(file) {}
 
   const uploadButton = document.querySelector('#upload');
   const confirmButton = document.querySelector('#confirm');
 
-  const files = document.querySelector('input#files');
+  const files = document.querySelector('#files');
 
   window.addEventListener('mousemove', () => {
     if (files.value) {
+      const form = document.querySelector('#form');
+
+      form.setAttribute(
+        'action',
+        `/api/uploads/${currentProject.innerText.toLowerCase()}`
+      );
+
       uploadButton.style.display = 'none';
       confirmButton.style.display = 'flex';
     } else {
       uploadButton.style.display = 'flex';
       confirmButton.style.display = 'none';
-    }
-  });
-
-  confirmButton.addEventListener('click', async () => {
-    try {
-      const response = await fetch(`${API_URL}/uploads/arcelor`, {
-        method: 'POST',
-        body: JSON.stringify(files.value),
-      });
-
-      const data = response.json();
-
-      console.log(data);
-    } catch (error) {
-      alert(error);
     }
   });
 
@@ -70,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     //   folder.appendChild(createFile({ fileName }));
     // });
 
-    folder.addEventListener('click', expandFolder);
+    folder.addEventListener('click', () => selectProject(params, folder));
   }
 
   async function getProjects() {

@@ -19,14 +19,21 @@ body {
 div#header {
   display: flex;
   flex-direction: row;
-  width: 50%;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
+  width: 50%;
 }
 
 h2#title {
   font-weight: bold;
+}
+
+h5#current {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #7159c1;
 }
 
 label#upload {
@@ -34,6 +41,14 @@ label#upload {
   color: white;
   padding: 10px;
   font-size: 18px;
+}
+
+#form {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 button#confirm {

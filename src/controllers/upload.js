@@ -1,7 +1,7 @@
-const { request, response } = require('@/config/app');
+const { request, response } = require('express');
 
-const photos = (req = request, res = response, next) => {
+const files = (req = request, res = response, next) => {
   return res.status(200).json(req.files);
 };
 
-module.exports = { photos };
+module.exports = { files };

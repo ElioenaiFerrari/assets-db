@@ -1,13 +1,11 @@
-require('module-alias/index');
+require('module-alias/register');
 const router = require('express').Router();
-const { photos } = require('@/controllers/upload');
-const { home } = require('./controllers/view');
-const multer = require('multer');
-const { findAllProjects } = require('./controllers/projects');
+const { files } = require('@/controllers/upload');
+const { home } = require('@/controllers/view');
+const { findAllProjects } = require('@/controllers/projects');
+const upload = require('@/middlewares/multer');
 
-const upload = multer({ dest: `./database/` });
-
-router.post('/api/uploads/photos', upload.array('photos', 20), photos);
+router.post('/api/uploads/:project', upload.array('file', 20), files);
 router.get('/api/projects', findAllProjects);
 router.get('/app', home);
 

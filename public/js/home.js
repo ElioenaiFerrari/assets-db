@@ -6,7 +6,22 @@ document.addEventListener('DOMContentLoaded', async function () {
   function expandFolder(folder) {}
   function excludeFile(file) {}
 
+  function createFile({ fileName }) {
+    const file = document.createElement('p');
+    file.setAttribute('class', 'file');
+
+    file.innerText = `${fileName}`;
+
+    const excludeFileButton = document.createElement('button');
+    excludeFileButton.addEventListener('click', excludeFile);
+
+    file.appendChild(excludeFileButton);
+
+    return file;
+  }
+
   function createFolder(params) {
+    console.log(params);
     const folder = document.createElement('li');
     folder.setAttribute('class', 'folder');
 
@@ -18,18 +33,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     folderName.setAttribute('class', 'folder-name');
     folder.innerText = `${params.folderName}`;
 
-    const file = document.createElement('div');
-    file.setAttribute('class', 'file');
+    Object.values(params.files).map((fileName) => {
+      folder.appendChild(createFile({ fileName }));
+    });
 
-    const excludeFileButton = document.createElement('button');
-
-    file.appendChild(excludeFileButton);
-    folder.appendChild(file);
     folder.appendChild(folderIcon);
     content.appendChild(folder);
 
     folder.addEventListener('click', expandFolder);
-    excludeFileButton.addEventListener('click', excludeFile);
   }
 
   async function getProjects() {
@@ -47,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const projects = await getProjects();
 
     Object.keys(projects).map(function (key) {
-      return createFolder({ folderName: key });
+      return createFolder({ folderName: key, files: projects[key] });
     });
   }
 

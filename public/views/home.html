@@ -12,7 +12,14 @@
     <title>Upload de imagens</title>
   </head>
   <body>
-    <h2 id="title">Projetos</h2>
+    <div id="header">
+      <h2 id="title">Projetos</h2>
+
+      <label for="files" id="upload">Fazer upload</label>
+      <button name="file" id="confirm">Confirmar</button>
+
+      <input type="file" id="files" multiple draggable="true" />
+    </div>
 
     <div id="container">
       <ul id="content"></ul>

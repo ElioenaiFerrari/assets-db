@@ -1,15 +1,21 @@
 require('module-alias/register');
 const { request, response } = require('express');
-const requireDir = require('require-dir');
-const projects = requireDir('../database', {
-  recurse: true,
-  duplicates: false,
-  extensions: ['.png'],
-});
+const path = require('path');
+const fs = require('fs');
+const database = path.join(__dirname, '../database');
 
 const findAllProjects = (req = request, res = response, next) => {
   try {
-    return res.status(200).json(projects);
+    const projects = fs.readdirSync(database);
+    const files = projects.reduce((acc, project) => {
+      acc[project] = fs.readdirSync(
+        path.join(__dirname, `../database/${project}`)
+      );
+
+      return acc;
+    }, {});
+
+    return res.status(200).json(files);
   } catch (error) {
     return res.status(400).json(error);
   }

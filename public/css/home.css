@@ -29,6 +29,20 @@ h2#title {
   font-weight: bold;
 }
 
+#project-name {
+  padding: 10px;
+  border: 1px solid grey;
+}
+
+button#new-project {
+  align-self: flex-end;
+  margin-bottom: 20px;
+  border: none;
+  padding: 10px;
+  background: green;
+  color: white;
+}
+
 h5#current {
   font-size: 18px;
   font-weight: bold;
@@ -78,6 +92,8 @@ ul#content {
   display: flex;
   width: 100%;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   list-style: none;
 }
 

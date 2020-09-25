@@ -9,10 +9,36 @@ document.addEventListener('DOMContentLoaded', async function () {
     currentProject.innerText = `${params.folderName}`;
   }
 
+  async function createProject() {
+    try {
+      const project = document.querySelector('#project-name');
+
+      const response = await fetch(`${API_URL}/projects`, {
+        method: 'POST',
+        body: JSON.stringify({
+          project: project.value,
+        }),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = response.json();
+
+      if (data) {
+        window.location.reload();
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
   function excludeFile(file) {}
 
   const uploadButton = document.querySelector('#upload');
   const confirmButton = document.querySelector('#confirm');
+  const createButton = document.querySelector('#new-project');
 
   const files = document.querySelector('#files');
 
@@ -68,6 +94,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     folder.addEventListener('click', () => selectProject(params, folder));
   }
+
+  createButton.addEventListener('click', createProject);
 
   async function getProjects() {
     try {

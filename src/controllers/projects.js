@@ -21,4 +21,18 @@ const findAllProjects = (req = request, res = response, next) => {
   }
 };
 
-module.exports = { findAllProjects };
+const createProject = (req = request, res = response) => {
+  try {
+    const { project } = req.body;
+
+    if (!fs.existsSync(path.join(__dirname, `../database/${project}`))) {
+      fs.mkdirSync(path.join(__dirname, `../database/${project}`));
+    }
+
+    return res.status(201).json({ success: true });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+module.exports = { findAllProjects, createProject };

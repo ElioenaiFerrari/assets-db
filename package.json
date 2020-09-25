@@ -17,7 +17,8 @@
     "require-dir": "^1.2.0"
   },
   "scripts": {
-    "dev": "nodemon -w . -w .env -w public/views/* src/main.js"
+    "dev": "nodemon -w . -w .env -w public/views/* src/main.js",
+    "start": "pm2 start --name $NAME src/main.js -i $CLUSTERS"
   },
   "_moduleAliases": {
     "@": "src/"

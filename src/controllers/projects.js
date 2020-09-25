@@ -21,6 +21,18 @@ const findAllProjects = (req = request, res = response, next) => {
   }
 };
 
+const projectFiles = (req = request, res = response) => {
+  try {
+    const project = fs.readdirSync(
+      path.join(__dirname, `../database/${req.params.name}`)
+    );
+
+    return res.status(200).json(project);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
 const createProject = (req = request, res = response) => {
   try {
     const { project } = req.body;
@@ -35,4 +47,4 @@ const createProject = (req = request, res = response) => {
   }
 };
 
-module.exports = { findAllProjects, createProject };
+module.exports = { findAllProjects, createProject, projectFiles };
